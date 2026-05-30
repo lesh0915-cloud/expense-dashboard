@@ -17,6 +17,18 @@
 }
 body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;padding:18px;user-select:none;}
 
+/* SYNC STATUS */
+.sync-bar{display:flex;align-items:center;justify-content:space-between;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:8px 14px;margin-bottom:12px;box-shadow:var(--shadow);}
+.sync-status{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--muted);}
+.sync-dot{width:8px;height:8px;border-radius:50%;background:var(--border);flex-shrink:0;transition:background .3s;}
+.sync-dot.ok{background:var(--green2);}
+.sync-dot.saving{background:var(--orange);animation:pulse .8s infinite;}
+.sync-dot.error{background:var(--red);}
+.sync-time{font-size:10px;color:var(--muted);font-family:var(--mono);}
+.setup-btn{background:var(--orange);border:none;color:#fff;padding:5px 12px;border-radius:7px;font-size:10px;font-family:var(--sans);font-weight:700;cursor:pointer;}
+.setup-btn:hover{opacity:.85;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
 /* HEADER */
 .header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px;}
 .header h1{font-size:20px;font-weight:900;color:var(--green);}
@@ -63,7 +75,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .save-btn:hover{opacity:.85;}
 
 /* CATEGORY GROUP */
-.cat-group{margin-bottom:10px;}
+.cat-group{margin-bottom:8px;}
 .cat-group-header{display:flex;align-items:center;justify-content:space-between;padding:6px 8px;background:var(--s2);border-radius:8px;margin-bottom:4px;cursor:pointer;}
 .cat-group-title{font-size:11px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:5px;}
 .cat-group-total{font-family:var(--mono);font-size:11px;font-weight:700;}
@@ -86,7 +98,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .item-pct{font-size:8px;color:var(--muted);text-align:right;}
 .edit-inp{background:var(--s2);border:1.5px solid var(--green);color:var(--text);font-family:var(--mono);font-size:11px;padding:3px 5px;border-radius:6px;width:84px;outline:none;text-align:right;}
 
-/* ADD ITEM BTN */
+/* ADD ITEM */
 .add-item-row{display:flex;align-items:center;gap:6px;padding:5px 5px;cursor:pointer;color:var(--muted);font-size:10px;border-radius:7px;transition:background .15s;margin-top:2px;}
 .add-item-row:hover{background:var(--s2);color:var(--green);}
 .add-item-btn{width:18px;height:18px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--muted);flex-shrink:0;}
@@ -128,17 +140,33 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .bfill{height:100%;border-radius:99px;}
 
 /* MODAL */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:100;display:none;align-items:center;justify-content:center;}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:200;display:none;align-items:center;justify-content:center;}
 .modal-bg.open{display:flex;}
-.modal{background:var(--surface);border-radius:14px;padding:22px;width:340px;box-shadow:0 8px 32px rgba(0,0,0,.18);}
+.modal{background:var(--surface);border-radius:14px;padding:22px;width:340px;box-shadow:0 8px 32px rgba(0,0,0,.2);max-height:90vh;overflow-y:auto;}
 .modal h3{font-size:14px;font-weight:800;margin-bottom:14px;color:var(--green);}
 .modal label{font-size:11px;color:var(--muted);font-weight:600;display:block;margin-bottom:4px;}
-.modal input,.modal select{width:100%;background:var(--s2);border:1.5px solid var(--border);border-radius:8px;padding:8px 10px;font-family:var(--sans);font-size:12px;color:var(--text);outline:none;margin-bottom:12px;}
+.modal input,.modal select,.modal textarea{width:100%;background:var(--s2);border:1.5px solid var(--border);border-radius:8px;padding:8px 10px;font-family:var(--sans);font-size:12px;color:var(--text);outline:none;margin-bottom:12px;}
 .modal input:focus,.modal select:focus{border-color:var(--green);}
 .modal-btns{display:flex;gap:8px;justify-content:flex-end;}
 .btn-cancel{background:var(--s2);border:1px solid var(--border);color:var(--muted);padding:7px 16px;border-radius:8px;font-size:12px;cursor:pointer;font-family:var(--sans);}
 .btn-ok{background:var(--green);border:none;color:#fff;padding:7px 16px;border-radius:8px;font-size:12px;cursor:pointer;font-family:var(--sans);font-weight:700;}
 .btn-del{background:rgba(224,92,92,.1);border:1px solid var(--red);color:var(--red);padding:7px 14px;border-radius:8px;font-size:12px;cursor:pointer;font-family:var(--sans);font-weight:700;margin-right:auto;}
+
+/* SETUP MODAL */
+.setup-modal{background:var(--surface);border-radius:14px;padding:24px;width:420px;box-shadow:0 8px 32px rgba(0,0,0,.2);}
+.setup-modal h3{font-size:15px;font-weight:800;margin-bottom:6px;color:var(--green);}
+.setup-modal p{font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.6;}
+.setup-modal label{font-size:11px;color:var(--muted);font-weight:600;display:block;margin-bottom:6px;}
+.setup-modal input{width:100%;background:var(--s2);border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;font-family:var(--mono);font-size:11px;color:var(--text);outline:none;margin-bottom:16px;}
+.setup-modal input:focus{border-color:var(--green);}
+.step-badge{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--green);color:#fff;font-size:10px;font-weight:700;margin-right:6px;flex-shrink:0;}
+.step-row{display:flex;align-items:flex-start;gap:0;margin-bottom:10px;font-size:12px;color:var(--text);}
+
+/* LOADING */
+.loading-overlay{position:fixed;inset:0;background:rgba(240,250,244,.85);z-index:300;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;}
+.loading-spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{font-size:13px;color:var(--muted);font-weight:600;}
 
 @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 .panel,.sc,.yb{animation:fadeIn .26s ease both;}
@@ -146,10 +174,26 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 </head>
 <body>
 
+<!-- 로딩 오버레이 -->
+<div class="loading-overlay" id="loading">
+  <div class="loading-spinner"></div>
+  <div class="loading-text">데이터 불러오는 중...</div>
+</div>
+
+<!-- 동기화 상태 바 -->
+<div class="sync-bar">
+  <div class="sync-status">
+    <div class="sync-dot" id="sync-dot"></div>
+    <span id="sync-text">연결 중...</span>
+  </div>
+  <span class="sync-time" id="sync-time"></span>
+  <button class="setup-btn" onclick="openSetup()">⚙️ 서버 설정</button>
+</div>
+
 <div class="header">
   <div>
     <h1>🌿 2026 가계부 대시보드</h1>
-    <div class="subtitle">항목 클릭으로 수정 · ＋ 버튼으로 항목 추가 · 💾 저장</div>
+    <div class="subtitle">수정하면 자동 저장 · 모든 기기에서 동기화</div>
   </div>
   <div class="ms-wrap">
     <div class="ms-year">2026년</div>
@@ -183,10 +227,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 <!-- 수입/지출/도넛 -->
 <div class="three-col">
   <div class="panel">
-    <div class="ptitle">
-      <span class="pdot" style="background:var(--blue)"></span>수입 내역
-      <button class="save-btn" onclick="saveData()">💾 저장</button>
-    </div>
+    <div class="ptitle"><span class="pdot" style="background:var(--blue)"></span>수입 내역</div>
     <div id="inc-list"></div>
   </div>
   <div class="panel">
@@ -256,166 +297,270 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
   </div>
 </div>
 
+<!-- 서버 설정 모달 -->
+<div class="modal-bg" id="setup-bg">
+  <div class="setup-modal">
+    <h3>⚙️ Google Sheets 연동 설정</h3>
+    <p>아래 순서대로 설정하면 모든 기기에서 데이터가 자동 동기화됩니다.</p>
+    <div class="step-row"><span class="step-badge">1</span><span><b>script.google.com</b> → 새 프로젝트 → Code.gs 파일 붙여넣기</span></div>
+    <div class="step-row"><span class="step-badge">2</span><span><b>배포 → 새 배포 → 웹 앱</b> → 액세스: 모든 사용자 → 배포</span></div>
+    <div class="step-row"><span class="step-badge">3</span><span>배포 후 생성된 <b>웹 앱 URL</b>을 아래에 붙여넣기</span></div>
+    <label>Google Apps Script 웹 앱 URL</label>
+    <input type="text" id="setup-url" placeholder="https://script.google.com/macros/s/XXXX/exec">
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeSetup()">취소</button>
+      <button class="btn-ok" onclick="saveSetup()">연결하기</button>
+    </div>
+  </div>
+</div>
+
 <script>
+// ════════════════════════════════════════════
+// 설정 & 동기화
+// ════════════════════════════════════════════
+let GAS_URL = localStorage.getItem('gas_url') || '';
+let saveTimer = null;
+let isSaving = false;
+
+function setSyncStatus(status, text, time) {
+  const dot = document.getElementById('sync-dot');
+  const txt = document.getElementById('sync-text');
+  const t   = document.getElementById('sync-time');
+  dot.className = 'sync-dot ' + (status || '');
+  txt.textContent = text;
+  if (time) t.textContent = '최근 저장: ' + time;
+}
+
+function openSetup() {
+  document.getElementById('setup-url').value = GAS_URL;
+  document.getElementById('setup-bg').classList.add('open');
+}
+function closeSetup() { document.getElementById('setup-bg').classList.remove('open'); }
+function saveSetup() {
+  const url = document.getElementById('setup-url').value.trim();
+  if (!url.startsWith('https://script.google.com')) {
+    alert('올바른 URL을 입력해 주세요.\nhttps://script.google.com/macros/s/... 형태여야 합니다.');
+    return;
+  }
+  GAS_URL = url;
+  localStorage.setItem('gas_url', url);
+  closeSetup();
+  loadFromServer();
+}
+
+// 서버에서 불러오기
+async function loadFromServer() {
+  if (!GAS_URL) {
+    setSyncStatus('error', '서버 미설정 — ⚙️ 서버 설정 버튼을 눌러주세요');
+    hideLoading();
+    return;
+  }
+  setSyncStatus('saving', '데이터 불러오는 중...');
+  try {
+    const res = await fetch(GAS_URL + '?action=load', {method:'GET'});
+    const json = await res.json();
+    if (json.status === 'ok' && json.data) {
+      const loaded = JSON.parse(json.data);
+      // 기존 state와 병합 (항목 구조 보존)
+      if (loaded.exp)  state.exp  = loaded.exp;
+      if (loaded.inc)  state.inc  = loaded.inc;
+      if (loaded.collapsed) state.collapsed = loaded.collapsed;
+      if (loaded.expItems && loaded.expItems.length) state.expItems = loaded.expItems;
+      if (loaded.incItems && loaded.incItems.length) state.incItems = loaded.incItems;
+      if (loaded.expGroups && loaded.expGroups.length) state.expGroups = loaded.expGroups;
+      if (loaded.incGroups && loaded.incGroups.length) state.incGroups = loaded.incGroups;
+      if (loaded.sel != null) state.sel = loaded.sel;
+      // 누락 보정
+      fixState();
+      setSyncStatus('ok', '동기화됨', formatTime(json.updated));
+    } else {
+      setSyncStatus('ok', '서버 연결됨 (저장된 데이터 없음)');
+    }
+  } catch(e) {
+    setSyncStatus('error', '서버 연결 실패 — URL을 확인해 주세요');
+  }
+  hideLoading();
+  renderAll();
+}
+
+// 서버에 저장 (디바운스 1.5초)
+function scheduleSave() {
+  setSyncStatus('saving', '저장 준비 중...');
+  if (saveTimer) clearTimeout(saveTimer);
+  saveTimer = setTimeout(()=>saveToServer(), 1500);
+}
+
+async function saveToServer() {
+  if (!GAS_URL) return;
+  isSaving = true;
+  setSyncStatus('saving', '저장 중...');
+  try {
+    const payload = JSON.stringify({
+      exp: state.exp, inc: state.inc,
+      expItems: state.expItems, incItems: state.incItems,
+      expGroups: state.expGroups, incGroups: state.incGroups,
+      collapsed: state.collapsed, sel: state.sel
+    });
+    const res = await fetch(GAS_URL, {
+      method: 'POST',
+      body: JSON.stringify({action:'save', payload}),
+      headers: {'Content-Type':'application/json'}
+    });
+    const json = await res.json();
+    if (json.status === 'ok') {
+      setSyncStatus('ok', '저장 완료 ✓', formatTime(json.updated));
+      // 로컬에도 백업
+      try { localStorage.setItem('dash_backup', JSON.stringify(state)); } catch(e){}
+    } else {
+      setSyncStatus('error', '저장 실패');
+    }
+  } catch(e) {
+    setSyncStatus('error', '저장 실패 — 네트워크 확인');
+    // 실패 시 로컬에 백업
+    try { localStorage.setItem('dash_backup', JSON.stringify(state)); } catch(e){}
+  }
+  isSaving = false;
+}
+
+function formatTime(iso) {
+  if (!iso) return '';
+  try {
+    const d = new Date(iso);
+    return d.toLocaleString('ko-KR',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+  } catch(e){ return iso; }
+}
+
+function showLoading() { document.getElementById('loading').style.display='flex'; }
+function hideLoading() { document.getElementById('loading').style.display='none'; }
+
 // ════════════════════════════════════════════
 // 기본 데이터 구조
 // ════════════════════════════════════════════
 const MONTHS=['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
 const CUR=4;
+const EMULT=[0.92,0.85,0.98,1.03,1.00,1.05,0.97,1.08,0.95,1.01,1.12,1.20];
 
-// 지출 그룹 정의 (id, name, icon, color, fixed=고정항목)
 const DEFAULT_EXP_GROUPS=[
-  {id:'g_fixed',  name:'고정 지출',  icon:'📌', color:'#2d8c4e'},
-  {id:'g_food',   name:'식 비',      icon:'🍽️', color:'#e07a2f'},
-  {id:'g_edu',    name:'교육비',     icon:'📚', color:'#2596be'},
-  {id:'g_card',   name:'카드 결제',  icon:'💳', color:'#8e44ad'},
-  {id:'g_life',   name:'생활/기타',  icon:'🏠', color:'#27ae7a'},
+  {id:'g_fixed', name:'고정 지출',  icon:'📌', color:'#2d8c4e'},
+  {id:'g_food',  name:'식 비',      icon:'🍽️', color:'#e07a2f'},
+  {id:'g_edu',   name:'교육비',     icon:'📚', color:'#2596be'},
+  {id:'g_card',  name:'카드 결제',  icon:'💳', color:'#8e44ad'},
+  {id:'g_life',  name:'생활/기타',  icon:'🏠', color:'#27ae7a'},
 ];
-
-// 지출 항목 기본값
 const DEFAULT_EXP_ITEMS=[
-  // 고정 지출
-  {id:'i_rent',    gid:'g_fixed', name:'월 세',      icon:'🏠', note:'고정',          budget:800000,  def:800000},
-  {id:'i_manage',  gid:'g_fixed', name:'관리비',      icon:'🔧', note:'아파트 관리비',  budget:200000,  def:180000},
-  {id:'i_comm',    gid:'g_fixed', name:'통신비',      icon:'📱', note:'핸드폰·인터넷', budget:100000,  def:90000},
-  {id:'i_saving',  gid:'g_fixed', name:'보험/저축',   icon:'🏦', note:'보험료·적금',   budget:300000,  def:300000},
-  // 식비
-  {id:'i_food',    gid:'g_food',  name:'식 비',       icon:'🍽️', note:'외식·식재료',   budget:500000,  def:450000},
-  {id:'i_trans',   gid:'g_food',  name:'교통비',      icon:'🚇', note:'대중교통·주유', budget:150000,  def:120000},
-  // 교육비
-  {id:'i_edu_kor', gid:'g_edu',   name:'국어 학원',   icon:'📖', note:'국어',          budget:150000,  def:150000},
-  {id:'i_edu_eng', gid:'g_edu',   name:'영어 학원',   icon:'🔤', note:'영어',          budget:200000,  def:200000},
-  {id:'i_edu_mat', gid:'g_edu',   name:'수학 학원',   icon:'🔢', note:'수학',          budget:180000,  def:180000},
-  // 카드 결제
-  {id:'i_card_ibk',gid:'g_card',  name:'IBK카드',     icon:'💳', note:'매월 25일 결제',budget:300000,  def:280000},
-  {id:'i_card_lot', gid:'g_card', name:'롯데카드',    icon:'💳', note:'매월 25일 결제',budget:200000,  def:190000},
-  {id:'i_card_hyu', gid:'g_card', name:'현대카드',    icon:'💳', note:'매월 25일 결제',budget:250000,  def:230000},
-  // 생활/기타
-  {id:'i_medical', gid:'g_life',  name:'의료비',      icon:'💊', note:'병원·약국',     budget:100000,  def:60000},
-  {id:'i_leisure', gid:'g_life',  name:'여가/취미',   icon:'🎯', note:'영화·운동',     budget:200000,  def:150000},
-  {id:'i_allow',   gid:'g_life',  name:'아이들 용돈', icon:'🧒', note:'자녀 용돈',     budget:200000,  def:150000},
-  {id:'i_stock',   gid:'g_life',  name:'주식 투자금', icon:'📈', note:'월 투자금',     budget:500000,  def:500000},
-  {id:'i_etc',     gid:'g_life',  name:'기 타',       icon:'📦', note:'기타 잡비',     budget:100000,  def:70000},
+  {id:'i_rent',    gid:'g_fixed',name:'월 세',      icon:'🏠',note:'고정',         budget:800000, def:800000},
+  {id:'i_manage',  gid:'g_fixed',name:'관리비',      icon:'🔧',note:'아파트 관리비', budget:200000, def:180000},
+  {id:'i_comm',    gid:'g_fixed',name:'통신비',      icon:'📱',note:'핸드폰·인터넷',budget:100000, def:90000},
+  {id:'i_saving',  gid:'g_fixed',name:'보험/저축',   icon:'🏦',note:'보험료·적금',  budget:300000, def:300000},
+  {id:'i_food',    gid:'g_food', name:'식 비',       icon:'🍽️',note:'외식·식재료',  budget:500000, def:450000},
+  {id:'i_trans',   gid:'g_food', name:'교통비',      icon:'🚇',note:'대중교통·주유',budget:150000, def:120000},
+  {id:'i_edu_kor', gid:'g_edu',  name:'국어 학원',   icon:'📖',note:'국어',         budget:150000, def:150000},
+  {id:'i_edu_eng', gid:'g_edu',  name:'영어 학원',   icon:'🔤',note:'영어',         budget:200000, def:200000},
+  {id:'i_edu_mat', gid:'g_edu',  name:'수학 학원',   icon:'🔢',note:'수학',         budget:180000, def:180000},
+  {id:'i_card_ibk',gid:'g_card', name:'IBK카드',     icon:'💳',note:'매월 25일 결제',budget:300000,def:280000},
+  {id:'i_card_lot',gid:'g_card', name:'롯데카드',    icon:'💳',note:'매월 25일 결제',budget:200000,def:190000},
+  {id:'i_card_hyu',gid:'g_card', name:'현대카드',    icon:'💳',note:'매월 25일 결제',budget:250000,def:230000},
+  {id:'i_medical', gid:'g_life', name:'의료비',      icon:'💊',note:'병원·약국',    budget:100000, def:60000},
+  {id:'i_leisure', gid:'g_life', name:'여가/취미',   icon:'🎯',note:'영화·운동',    budget:200000, def:150000},
+  {id:'i_allow',   gid:'g_life', name:'아이들 용돈', icon:'🧒',note:'자녀 용돈',    budget:200000, def:150000},
+  {id:'i_stock',   gid:'g_life', name:'주식 투자금', icon:'📈',note:'월 투자금',    budget:500000, def:500000},
+  {id:'i_etc',     gid:'g_life', name:'기 타',       icon:'📦',note:'기타 잡비',    budget:100000, def:70000},
 ];
-
-// 수입 그룹/항목
 const DEFAULT_INC_GROUPS=[
   {id:'gi_fixed',  name:'고정 수입', icon:'💼', color:'#2596be'},
   {id:'gi_invest', name:'투자 수입', icon:'📊', color:'#27ae7a'},
   {id:'gi_etc',    name:'기타 수입', icon:'💰', color:'#f0a500'},
 ];
 const DEFAULT_INC_ITEMS=[
-  {id:'ii_rent',   gid:'gi_fixed',  name:'임대 수입',  icon:'🏘️', note:'월세 수취 (고정)', budget:800000, def:800000},
-  {id:'ii_salary', gid:'gi_fixed',  name:'급 여',      icon:'💼', note:'월 급여',          budget:0,      def:0},
-  {id:'ii_div',    gid:'gi_invest', name:'배당금',     icon:'💹', note:'주식 배당',         budget:0,      def:0},
-  {id:'ii_sell',   gid:'gi_invest', name:'주식 매도',  icon:'📊', note:'주식 판매 수익',    budget:0,      def:0},
-  {id:'ii_etc',    gid:'gi_etc',    name:'기타 수입',  icon:'💰', note:'기타',              budget:0,      def:0},
+  {id:'ii_rent',  gid:'gi_fixed',  name:'임대 수입', icon:'🏘️',note:'월세 수취 (고정)',budget:800000,def:800000},
+  {id:'ii_salary',gid:'gi_fixed',  name:'급 여',     icon:'💼',note:'월 급여',         budget:0,     def:0},
+  {id:'ii_div',   gid:'gi_invest', name:'배당금',    icon:'💹',note:'주식 배당',        budget:0,     def:0},
+  {id:'ii_sell',  gid:'gi_invest', name:'주식 매도', icon:'📊',note:'주식 판매 수익',   budget:0,     def:0},
+  {id:'ii_etc',   gid:'gi_etc',   name:'기타 수입',  icon:'💰',note:'기타',            budget:0,     def:0},
 ];
 
-const EMULT=[0.92,0.85,0.98,1.03,1.00,1.05,0.97,1.08,0.95,1.01,1.12,1.20];
+function makeExpDefault(mi){
+  const m=EMULT[mi]||1, o={};
+  DEFAULT_EXP_ITEMS.forEach(it=>{ o[it.id]=Math.round(it.def*m); });
+  return o;
+}
+function makeIncDefault(mi){
+  const o={};
+  DEFAULT_INC_ITEMS.forEach(it=>{
+    let v=Math.round(it.def*(EMULT[mi]||1));
+    if(it.id==='ii_div') v=[2,5,8,11].includes(mi)?150000:0;
+    if(it.id==='ii_sell') v=Math.random()>0.6?Math.round(200000+Math.random()*300000):0;
+    o[it.id]=v;
+  });
+  return o;
+}
 
-// ════════════════════════════════════════════
-// STATE
-// ════════════════════════════════════════════
-let state;
 function initState(){
   const exp={}, inc={};
+  MONTHS.forEach((_,mi)=>{ exp[mi]=makeExpDefault(mi); inc[mi]=makeIncDefault(mi); });
+  return {sel:CUR,exp,inc,
+    expGroups:JSON.parse(JSON.stringify(DEFAULT_EXP_GROUPS)),
+    expItems: JSON.parse(JSON.stringify(DEFAULT_EXP_ITEMS)),
+    incGroups:JSON.parse(JSON.stringify(DEFAULT_INC_GROUPS)),
+    incItems: JSON.parse(JSON.stringify(DEFAULT_INC_ITEMS)),
+    collapsed:{}};
+}
+
+// 로컬 백업에서 복원 시도
+let state;
+try {
+  const backup = localStorage.getItem('dash_backup');
+  state = backup ? JSON.parse(backup) : initState();
+} catch(e) { state = initState(); }
+
+function fixState(){
   MONTHS.forEach((_,mi)=>{
-    exp[mi]={}; inc[mi]={};
-    DEFAULT_EXP_ITEMS.forEach(it=>{ exp[mi][it.id]=Math.round(it.def*EMULT[mi]); });
-    DEFAULT_INC_ITEMS.forEach(it=>{
-      let v=Math.round(it.def*EMULT[mi]);
-      // 배당금: 3,6,9,12월만
-      if(it.id==='ii_div') v=[2,5,8,11].includes(mi)?150000:0;
-      if(it.id==='ii_sell') v=Math.random()>0.6?Math.round(200000+Math.random()*300000):0;
-      inc[mi][it.id]=v;
-    });
+    if(!state.exp[mi]) state.exp[mi]={};
+    if(!state.inc[mi]) state.inc[mi]={};
+    state.expItems.forEach(it=>{ if(state.exp[mi][it.id]==null) state.exp[mi][it.id]=Math.round(it.def*(EMULT[mi]||1)); });
+    state.incItems.forEach(it=>{ if(state.inc[mi][it.id]==null) state.inc[mi][it.id]=0; });
   });
-  return {
-    sel:CUR,
-    exp, inc,
-    expGroups: JSON.parse(JSON.stringify(DEFAULT_EXP_GROUPS)),
-    expItems:  JSON.parse(JSON.stringify(DEFAULT_EXP_ITEMS)),
-    incGroups: JSON.parse(JSON.stringify(DEFAULT_INC_GROUPS)),
-    incItems:  JSON.parse(JSON.stringify(DEFAULT_INC_ITEMS)),
-    collapsed: {}
-  };
+  if(!state.collapsed) state.collapsed={};
 }
-
-try{ state=JSON.parse(localStorage.getItem('dash2026v4'))||null; }catch(e){ state=null; }
-if(!state) state=initState();
-// 누락 보정
-MONTHS.forEach((_,mi)=>{
-  if(!state.exp[mi]) state.exp[mi]={};
-  if(!state.inc[mi]) state.inc[mi]={};
-  state.expItems.forEach(it=>{ if(state.exp[mi][it.id]==null) state.exp[mi][it.id]=Math.round(it.def*EMULT[mi]); });
-  state.incItems.forEach(it=>{ if(state.inc[mi][it.id]==null) state.inc[mi][it.id]=0; });
-});
-if(!state.collapsed) state.collapsed={};
-
-function saveState(){ try{ localStorage.setItem('dash2026v4',JSON.stringify(state)); }catch(e){} }
-function saveData(){
-  saveState();
-  const b=document.querySelector('.save-btn');
-  b.textContent='✓ 저장됨'; b.style.background='#27ae7a';
-  setTimeout(()=>{ b.textContent='💾 저장'; b.style.background=''; },1800);
-}
+fixState();
 
 // ════════════════════════════════════════════
 // UTILS
 // ════════════════════════════════════════════
 function fmt(n){ return'₩'+Math.round(n).toLocaleString('ko-KR'); }
 function fmtS(n){ return(n>=0?'+':'')+fmt(n); }
-function uid(){ return 'u'+Date.now().toString(36)+Math.random().toString(36).slice(2,5); }
-function getExpTotal(mi){
-  return state.expItems.reduce((s,it)=>s+(state.exp[mi][it.id]||0),0);
-}
-function getIncTotal(mi){
-  return state.incItems.reduce((s,it)=>s+(state.inc[mi][it.id]||0),0);
-}
-function getGroupExpTotal(mi,gid){
-  return state.expItems.filter(it=>it.gid===gid).reduce((s,it)=>s+(state.exp[mi][it.id]||0),0);
-}
-function getGroupIncTotal(mi,gid){
-  return state.incItems.filter(it=>it.gid===gid).reduce((s,it)=>s+(state.inc[mi][it.id]||0),0);
-}
+function uid(){ return'u'+Date.now().toString(36)+Math.random().toString(36).slice(2,5); }
+function getExpTotal(mi){ return state.expItems.reduce((s,it)=>s+(state.exp[mi][it.id]||0),0); }
+function getIncTotal(mi){ return state.incItems.reduce((s,it)=>s+(state.inc[mi][it.id]||0),0); }
+function getGroupExpTotal(mi,gid){ return state.expItems.filter(it=>it.gid===gid).reduce((s,it)=>s+(state.exp[mi][it.id]||0),0); }
+function getGroupIncTotal(mi,gid){ return state.incItems.filter(it=>it.gid===gid).reduce((s,it)=>s+(state.inc[mi][it.id]||0),0); }
 
 // ════════════════════════════════════════════
-// MONTH SELECTOR
+// RENDER
 // ════════════════════════════════════════════
 function renderMS(){
   document.getElementById('ms').innerHTML=MONTHS.map((m,i)=>
     `<button class="mbtn ${state.sel===i?'active':''}" onclick="sel(${i})">${m}</button>`).join('');
 }
-function sel(i){ state.sel=i; renderAll(); }
+function sel(i){ state.sel=i; renderAll(); scheduleSave(); }
 
-// ════════════════════════════════════════════
-// YEAR BANNER
-// ════════════════════════════════════════════
 function renderYearBanner(){
   const incT=MONTHS.map((_,i)=>getIncTotal(i));
   const expT=MONTHS.map((_,i)=>getExpTotal(i));
-  const yInc=incT.reduce((a,b)=>a+b,0);
-  const yExp=expT.reduce((a,b)=>a+b,0);
-  const yNet=yInc-yExp;
-  const avg=Math.round(yExp/12);
+  const yInc=incT.reduce((a,b)=>a+b,0), yExp=expT.reduce((a,b)=>a+b,0), yNet=yInc-yExp;
   let pk=0; expT.forEach((v,i)=>{ if(v>expT[pk]) pk=i; });
-  const rate=yInc>0?(yNet/yInc*100):0;
   document.getElementById('yb-inc').textContent=fmt(yInc);
   document.getElementById('yb-exp').textContent=fmt(yExp);
   const ne=document.getElementById('yb-net');
   ne.textContent=fmtS(yNet); ne.className='yb-val '+(yNet>=0?'pos':'neg');
-  document.getElementById('yb-avg').textContent=fmt(avg);
+  document.getElementById('yb-avg').textContent=fmt(Math.round(yExp/12));
   document.getElementById('yb-peak').textContent=MONTHS[pk];
-  document.getElementById('yb-rate').textContent=rate.toFixed(1)+'%';
+  document.getElementById('yb-rate').textContent=(yInc>0?(yNet/yInc*100):0).toFixed(1)+'%';
 }
 
-// ════════════════════════════════════════════
-// SUMMARY CARDS
-// ════════════════════════════════════════════
 function renderSummary(){
-  const mi=state.sel, inc=getIncTotal(mi), exp=getExpTotal(mi);
-  const net=inc-exp, prev=mi>0?getExpTotal(mi-1):exp;
+  const mi=state.sel, inc=getIncTotal(mi), exp=getExpTotal(mi), net=inc-exp;
+  const prev=mi>0?getExpTotal(mi-1):exp;
   const delta=prev>0?((exp-prev)/prev*100):0;
   const rate=inc>0?(net/inc*100):0;
   document.getElementById('s-inc').textContent=fmt(inc);
@@ -431,11 +576,7 @@ function renderSummary(){
   document.getElementById('s-ratesub').textContent=rate>=20?'👍 목표 달성':rate>=0?'목표 20%':'적자 상태';
 }
 
-// ════════════════════════════════════════════
-// 편집 상태
-// ════════════════════════════════════════════
 let editId=null, editType=null;
-
 function startEdit(id,type,evt){
   if(evt) evt.stopPropagation();
   editId=id; editType=type;
@@ -446,7 +587,9 @@ function commit(id,type){
   const val=parseInt(e.value)||0;
   if(type==='inc') state.inc[state.sel][id]=val;
   else state.exp[state.sel][id]=val;
-  editId=null; editType=null; renderAll();
+  editId=null; editType=null;
+  renderAll();
+  scheduleSave(); // ← 수정 시 자동 저장
 }
 function ekey(ev,id,type){
   if(ev.key==='Enter') commit(id,type);
@@ -454,9 +597,6 @@ function ekey(ev,id,type){
 }
 function focusEdit(){ setTimeout(()=>{ const e=document.getElementById('ei'); if(e){e.focus();e.select();} },30); }
 
-// ════════════════════════════════════════════
-// 수입 리스트 렌더
-// ════════════════════════════════════════════
 function renderIncList(){
   const mi=state.sel, grandTotal=getIncTotal(mi);
   let html='';
@@ -464,7 +604,7 @@ function renderIncList(){
     const items=state.incItems.filter(it=>it.gid===g.id);
     const gTotal=getGroupIncTotal(mi,g.id);
     const collapsed=state.collapsed['inc_'+g.id];
-    html+=`<div class="cat-group ${collapsed?'collapsed':''}" id="cg_inc_${g.id}">
+    html+=`<div class="cat-group ${collapsed?'collapsed':''}">
       <div class="cat-group-header" onclick="toggleGroup('inc','${g.id}')">
         <div class="cat-group-title"><span>${g.icon}</span><span>${g.name}</span></div>
         <div style="display:flex;align-items:center;gap:8px;">
@@ -474,20 +614,19 @@ function renderIncList(){
       </div>
       <div class="cat-group-body">`;
     items.forEach(it=>{
-      const amt=state.inc[mi][it.id]||0;
-      const pct=grandTotal>0?(amt/grandTotal*100):0;
+      const amt=state.inc[mi][it.id]||0, pct=grandTotal>0?(amt/grandTotal*100):0;
       const isE=editId===it.id&&editType==='inc';
       html+=`<div class="item-row sub" onclick="startEdit('${it.id}','inc',event)">
         <div class="item-icon">${it.icon}</div>
-        <div><div class="item-name">${it.name}</div><div class="item-note">${it.note}</div></div>
+        <div><div class="item-name" style="color:${g.color}">${it.name}
+          <span onclick="openEditModal('inc','${it.id}',event)" style="font-size:9px;color:var(--muted);margin-left:4px;cursor:pointer;">✏️</span>
+        </div><div class="item-note">${it.note}</div></div>
         <div class="bar-wrap"><div class="bar-fill" style="width:${pct}%;background:${g.color}"></div></div>
         <div style="text-align:right">
-          ${isE
-            ? `<input class="edit-inp" id="ei" type="number" value="${amt}" onblur="commit('${it.id}','inc')" onkeydown="ekey(event,'${it.id}','inc')" onclick="event.stopPropagation()">`
-            : `<div class="item-amt" style="color:${g.color}">+${fmt(amt)}</div>`}
+          ${isE?`<input class="edit-inp" id="ei" type="number" value="${amt}" onblur="commit('${it.id}','inc')" onkeydown="ekey(event,'${it.id}','inc')" onclick="event.stopPropagation()">`
+               :`<div class="item-amt" style="color:${g.color}">+${fmt(amt)}</div>`}
           <div class="item-pct">${pct.toFixed(1)}%</div>
-        </div>
-      </div>`;
+        </div></div>`;
     });
     html+=`<div class="add-item-row" onclick="openAddModal('inc','${g.id}')">
       <div class="add-item-btn">＋</div><span>항목 추가</span>
@@ -498,9 +637,6 @@ function renderIncList(){
   if(editId&&editType==='inc') focusEdit();
 }
 
-// ════════════════════════════════════════════
-// 지출 리스트 렌더
-// ════════════════════════════════════════════
 function renderExpList(){
   const mi=state.sel, grandTotal=getExpTotal(mi);
   let html='';
@@ -508,7 +644,7 @@ function renderExpList(){
     const items=state.expItems.filter(it=>it.gid===g.id);
     const gTotal=getGroupExpTotal(mi,g.id);
     const collapsed=state.collapsed['exp_'+g.id];
-    html+=`<div class="cat-group ${collapsed?'collapsed':''}" id="cg_exp_${g.id}">
+    html+=`<div class="cat-group ${collapsed?'collapsed':''}">
       <div class="cat-group-header" onclick="toggleGroup('exp','${g.id}')">
         <div class="cat-group-title"><span>${g.icon}</span><span>${g.name}</span></div>
         <div style="display:flex;align-items:center;gap:8px;">
@@ -518,25 +654,19 @@ function renderExpList(){
       </div>
       <div class="cat-group-body">`;
     items.forEach(it=>{
-      const amt=state.exp[mi][it.id]||0;
-      const pct=grandTotal>0?(amt/grandTotal*100):0;
+      const amt=state.exp[mi][it.id]||0, pct=grandTotal>0?(amt/grandTotal*100):0;
       const isE=editId===it.id&&editType==='exp';
       html+=`<div class="item-row sub" onclick="startEdit('${it.id}','exp',event)">
         <div class="item-icon">${it.icon}</div>
-        <div>
-          <div class="item-name">${it.name}
-            <span onclick="openEditModal('exp','${it.id}',event)" style="font-size:9px;color:var(--muted);margin-left:4px;cursor:pointer;">✏️</span>
-          </div>
-          <div class="item-note">${it.note}</div>
-        </div>
+        <div><div class="item-name">${it.name}
+          <span onclick="openEditModal('exp','${it.id}',event)" style="font-size:9px;color:var(--muted);margin-left:4px;cursor:pointer;">✏️</span>
+        </div><div class="item-note">${it.note}</div></div>
         <div class="bar-wrap"><div class="bar-fill" style="width:${pct}%;background:${g.color}"></div></div>
         <div style="text-align:right">
-          ${isE
-            ? `<input class="edit-inp" id="ei" type="number" value="${amt}" onblur="commit('${it.id}','exp')" onkeydown="ekey(event,'${it.id}','exp')" onclick="event.stopPropagation()">`
-            : `<div class="item-amt" style="color:${g.color}">${fmt(amt)}</div>`}
+          ${isE?`<input class="edit-inp" id="ei" type="number" value="${amt}" onblur="commit('${it.id}','exp')" onkeydown="ekey(event,'${it.id}','exp')" onclick="event.stopPropagation()">`
+               :`<div class="item-amt" style="color:${g.color}">${fmt(amt)}</div>`}
           <div class="item-pct">${pct.toFixed(1)}%</div>
-        </div>
-      </div>`;
+        </div></div>`;
     });
     html+=`<div class="add-item-row" onclick="openAddModal('exp','${g.id}')">
       <div class="add-item-btn">＋</div><span>항목 추가</span>
@@ -551,10 +681,11 @@ function toggleGroup(type,gid){
   const key=type+'_'+gid;
   state.collapsed[key]=!state.collapsed[key];
   type==='inc'?renderIncList():renderExpList();
+  scheduleSave();
 }
 
 // ════════════════════════════════════════════
-// 모달 (항목 추가/편집/삭제)
+// 모달
 // ════════════════════════════════════════════
 let modalCtx={type:null,gid:null,editItemId:null};
 
@@ -571,7 +702,6 @@ function openAddModal(type,gid){
   sel.innerHTML=groups.map(g=>`<option value="${g.id}" ${g.id===gid?'selected':''}>${g.icon} ${g.name}</option>`).join('');
   document.getElementById('modal-bg').classList.add('open');
 }
-
 function openEditModal(type,itemId,evt){
   if(evt) evt.stopPropagation();
   const items=type==='inc'?state.incItems:state.expItems;
@@ -588,9 +718,7 @@ function openEditModal(type,itemId,evt){
   sel.innerHTML=groups.map(g=>`<option value="${g.id}" ${g.id===it.gid?'selected':''}>${g.icon} ${g.name}</option>`).join('');
   document.getElementById('modal-bg').classList.add('open');
 }
-
 function closeModal(){ document.getElementById('modal-bg').classList.remove('open'); }
-
 function confirmModal(){
   const name=document.getElementById('m-name').value.trim();
   if(!name){ alert('이름을 입력해 주세요.'); return; }
@@ -599,14 +727,11 @@ function confirmModal(){
   const gid=document.getElementById('m-group').value;
   const budget=parseInt(document.getElementById('m-budget').value)||0;
   const {type,editItemId}=modalCtx;
-
   if(editItemId){
-    // 수정
     const items=type==='inc'?state.incItems:state.expItems;
     const it=items.find(i=>i.id===editItemId);
     if(it){ it.name=name; it.note=note; it.icon=icon; it.gid=gid; it.budget=budget; }
   } else {
-    // 추가
     const newId=uid();
     const newItem={id:newId,gid,name,icon,note,budget,def:0};
     if(type==='inc'){
@@ -617,14 +742,11 @@ function confirmModal(){
       MONTHS.forEach((_,mi)=>{ state.exp[mi][newId]=0; });
     }
   }
-  closeModal();
-  renderAll();
+  closeModal(); renderAll(); scheduleSave();
 }
-
 function deleteItem(){
   if(!confirm('이 항목을 삭제하시겠습니까?')) return;
-  const {type,editItemId}=modalCtx;
-  if(!editItemId) return;
+  const {type,editItemId}=modalCtx; if(!editItemId)return;
   if(type==='inc'){
     state.incItems=state.incItems.filter(i=>i.id!==editItemId);
     MONTHS.forEach((_,mi)=>{ delete state.inc[mi][editItemId]; });
@@ -632,25 +754,21 @@ function deleteItem(){
     state.expItems=state.expItems.filter(i=>i.id!==editItemId);
     MONTHS.forEach((_,mi)=>{ delete state.exp[mi][editItemId]; });
   }
-  closeModal(); renderAll();
+  closeModal(); renderAll(); scheduleSave();
 }
-
-// 모달 바깥 클릭 시 닫기
-document.getElementById('modal-bg').addEventListener('click',function(e){
-  if(e.target===this) closeModal();
-});
+document.getElementById('modal-bg').addEventListener('click',function(e){ if(e.target===this) closeModal(); });
+document.getElementById('setup-bg').addEventListener('click',function(e){ if(e.target===this) closeSetup(); });
 
 // ════════════════════════════════════════════
-// DONUT
+// DONUT, NET BAR, BUDGET, TREND
 // ════════════════════════════════════════════
-const DCOLS=['#2d8c4e','#e05c5c','#27ae7a','#f0a500','#e07a2f','#2596be','#8e44ad','#16a085','#d35400','#2980b9','#7f8c8d','#c0392b','#1abc9c','#e74c3c','#3498db','#9b59b6'];
 function renderDonut(){
   const mi=state.sel, total=getExpTotal(mi);
   const cv=document.getElementById('donut'), ctx=cv.getContext('2d');
   const W=136,cx=68,cy=68,R=62,ri=40;
   cv.width=W; cv.height=W; ctx.clearRect(0,0,W,W);
   let s=-Math.PI/2;
-  state.expGroups.forEach((g,gi)=>{
+  state.expGroups.forEach(g=>{
     const v=getGroupExpTotal(mi,g.id), a=total>0?(v/total)*Math.PI*2:0;
     ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,R,s,s+a); ctx.closePath();
     ctx.fillStyle=g.color; ctx.fill(); s+=a;
@@ -664,9 +782,6 @@ function renderDonut(){
   }).join('');
 }
 
-// ════════════════════════════════════════════
-// NET BAR
-// ════════════════════════════════════════════
 function renderNetBar(){
   const mi=state.sel, inc=getIncTotal(mi), exp=getExpTotal(mi), mx=Math.max(inc,exp,1);
   document.getElementById('nb-exp').style.width=(exp/mx*100).toFixed(1)+'%';
@@ -675,34 +790,24 @@ function renderNetBar(){
   document.getElementById('nb-inclbl').textContent='수입 '+fmt(inc);
 }
 
-// ════════════════════════════════════════════
-// BUDGET BARS (그룹별)
-// ════════════════════════════════════════════
 function renderBudgetBars(){
   const mi=state.sel;
   document.getElementById('budget-bars').innerHTML=state.expGroups.map(g=>{
     const spent=getGroupExpTotal(mi,g.id);
     const budget=state.expItems.filter(it=>it.gid===g.id).reduce((s,it)=>s+(it.budget||0),0);
-    const p=budget>0?Math.min((spent/budget)*100,100):0;
-    const over=spent>budget&&budget>0;
-    return `<div>
-      <div class="brow"><span class="bname">${g.icon} ${g.name}</span>
+    const p=budget>0?Math.min((spent/budget)*100,100):0, over=spent>budget&&budget>0;
+    return `<div><div class="brow"><span class="bname">${g.icon} ${g.name}</span>
       <span class="bnum" style="color:${over?'#e05c5c':g.color}">${fmt(spent)} / ${fmt(budget)}</span></div>
-      <div class="btrack"><div class="bfill" style="width:${p}%;background:${over?'#e05c5c':g.color}"></div></div>
-    </div>`;
+      <div class="btrack"><div class="bfill" style="width:${p}%;background:${over?'#e05c5c':g.color}"></div></div></div>`;
   }).join('');
 }
 
-// ════════════════════════════════════════════
-// TREND
-// ════════════════════════════════════════════
 function renderTrend(){
   const incT=MONTHS.map((_,i)=>getIncTotal(i));
   const expT=MONTHS.map((_,i)=>getExpTotal(i));
   const mx=Math.max(...incT,...expT,1);
   document.getElementById('trend').innerHTML=MONTHS.map((m,i)=>{
-    const ih=Math.round((incT[i]/mx)*62), eh=Math.round((expT[i]/mx)*62);
-    const isc=i===state.sel;
+    const ih=Math.round((incT[i]/mx)*62), eh=Math.round((expT[i]/mx)*62), isc=i===state.sel;
     return `<div class="tcol">
       <div class="tbar-outer" style="height:64px;">
         <div class="tbar" style="height:${ih}px;background:${isc?'#27ae7a':'#a8d5b5'};opacity:${isc?1:.55};"></div>
@@ -713,22 +818,18 @@ function renderTrend(){
   }).join('');
 }
 
-// ════════════════════════════════════════════
-// RENDER ALL
-// ════════════════════════════════════════════
 function renderAll(){
-  renderMS();
-  renderYearBanner();
-  renderSummary();
-  renderIncList();
-  renderExpList();
-  renderDonut();
-  renderNetBar();
-  renderBudgetBars();
-  renderTrend();
+  renderMS(); renderYearBanner(); renderSummary();
+  renderIncList(); renderExpList();
+  renderDonut(); renderNetBar(); renderBudgetBars(); renderTrend();
 }
 
-renderAll();
+// ════════════════════════════════════════════
+// 시작
+// ════════════════════════════════════════════
+showLoading();
+renderAll(); // 로컬 백업 데이터로 먼저 표시
+loadFromServer(); // 서버에서 최신 데이터 불러오기
 </script>
 </body>
 </html>
