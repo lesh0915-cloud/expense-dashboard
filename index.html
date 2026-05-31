@@ -395,28 +395,22 @@ async function saveToServer() {
   isSaving = true;
   setSyncStatus('saving', '저장 중...');
   try {
-    const payload = JSON.stringify({
+    const payload = encodeURIComponent(JSON.stringify({
       exp: state.exp, inc: state.inc,
       expItems: state.expItems, incItems: state.incItems,
       expGroups: state.expGroups, incGroups: state.incGroups,
       collapsed: state.collapsed, sel: state.sel
-    });
-    const res = await fetch(GAS_URL, {
-      method: 'POST',
-      body: JSON.stringify({action:'save', payload}),
-      headers: {'Content-Type':'application/json'}
-    });
+    }));
+    const res = await fetch(GAS_URL + '?action=save&payload=' + payload, {method: 'GET'});
     const json = await res.json();
     if (json.status === 'ok') {
       setSyncStatus('ok', '저장 완료 ✓', formatTime(json.updated));
-      // 로컬에도 백업
       try { localStorage.setItem('dash_backup', JSON.stringify(state)); } catch(e){}
     } else {
       setSyncStatus('error', '저장 실패');
     }
   } catch(e) {
     setSyncStatus('error', '저장 실패 — 네트워크 확인');
-    // 실패 시 로컬에 백업
     try { localStorage.setItem('dash_backup', JSON.stringify(state)); } catch(e){}
   }
   isSaving = false;
